@@ -1,5 +1,6 @@
 package loginTests;
 
+import libs.DriverInitiator;
 import libs.ExceptionHelper;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -14,30 +15,32 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by sergii.ivashko on 20.02.2018.
  */
-public class NegativeLogin
+public class NegativeInitialLogin
 {
     WebDriver driver;
     //WebDriverWait wait;
     Logger log;
     LoginPage loginPage;
     ExceptionHelper exceptionHelper;
+    DriverInitiator driverInitiator;
 
     @Before
     public void Setup ()
     {
         //File fileFF = new File("./drivers/chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", fileFF.getAbsolutePath());
-        driver = new ChromeDriver();
+        driverInitiator = new DriverInitiator();
+        this.driver = driverInitiator.StartChromeDriver();
+        //driver = new ChromeDriver();
         //wait = new WebDriverWait(driver, 10);
         log = Logger.getLogger(getClass());
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         loginPage = new LoginPage(driver);
-        exceptionHelper = new ExceptionHelper();
+        //exceptionHelper = new ExceptionHelper();
         // homePage = new HomePage(driver);
     }
 
     @Test
-    public void ValidLogin ()
+    public void NegativeLogin ()
     {
         loginPage.OpenLoginPage("http://127.0.0.1:8100/");
         loginPage.InputLogin("admin");
@@ -57,6 +60,7 @@ public class NegativeLogin
     public void CloseDriver ()
     {
         driver.quit();
+        driver = null;
     }
 
 
