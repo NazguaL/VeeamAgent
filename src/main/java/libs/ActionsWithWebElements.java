@@ -32,7 +32,7 @@ public class ActionsWithWebElements
         log.trace("Clicked on button: " + button);
     }
 
-    public String ReturnText (By element) throws Exception
+    public String ReturnText (By element)
     {
         String result = driver.findElement(element).getText();
         return result;

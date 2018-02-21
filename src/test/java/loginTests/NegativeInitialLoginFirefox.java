@@ -9,10 +9,12 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import pages.LoginPage;
 
+
+
 /**
  * Created by sergii.ivashko on 21.02.2018.
  */
-public class PositiveInitialLoginFirefox
+public class NegativeInitialLoginFirefox
 {
     WebDriver driver;
     //WebDriverWait wait;
@@ -31,13 +33,13 @@ public class PositiveInitialLoginFirefox
     }
 
     @Test
-    public void ValidLoginViaFirefox ()
+    public void NegativeLoginViaFirefox ()
     {
         loginPage.OpenLoginPage("http://127.0.0.1:8100/");
         loginPage.InputLogin("admin");
-        loginPage.InputPass("admin");
+        loginPage.InputPass("adm");
         loginPage.ClickSubmitButton();
-        loginPage.CompareTitle("Veeam Appliance for AHV.");
+        loginPage.CompareAlert("Incorrect login or password");
         log.trace("Page title is: " + driver.getTitle());
     }
 
@@ -47,4 +49,5 @@ public class PositiveInitialLoginFirefox
         driver.quit();
         driver = null;
     }
+
 }

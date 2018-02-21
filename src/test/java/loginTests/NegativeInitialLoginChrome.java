@@ -7,15 +7,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LoginPage;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by sergii.ivashko on 20.02.2018.
  */
-public class NegativeInitialLogin
+public class NegativeInitialLoginChrome
 {
     WebDriver driver;
     //WebDriverWait wait;
@@ -25,7 +22,7 @@ public class NegativeInitialLogin
     DriverInitiator driverInitiator;
 
     @Before
-    public void Setup ()
+    public void SetupChrome ()
     {
         //File fileFF = new File("./drivers/chromedriver.exe");
         //System.setProperty("webdriver.chrome.driver", fileFF.getAbsolutePath());
@@ -40,7 +37,7 @@ public class NegativeInitialLogin
     }
 
     @Test
-    public void NegativeLogin ()
+    public void NegativeLoginViaChrome ()
     {
         loginPage.OpenLoginPage("http://127.0.0.1:8100/");
         loginPage.InputLogin("admin");
@@ -57,11 +54,10 @@ public class NegativeInitialLogin
     }
 
     @After
-    public void CloseDriver ()
+    public void CloseChromeDriver ()
     {
         driver.quit();
         driver = null;
     }
-
 
 }

@@ -37,7 +37,7 @@ public class LoginPage {
         try
         {
             driver.get(link);
-            log.trace("Page is opened");
+            log.trace("Login page is opened");
         }
         catch (Exception e)
         {
@@ -80,26 +80,21 @@ public class LoginPage {
 
     public void CompareTitle (String expectedTitle)
     {
-        try
-        {
+        //try
+        //{
             String actualTitle = actionsWithWebElements.ReturnText(afterLoginTitle);
             log.trace("Login title is: " + actualTitle);
             Assert.assertEquals(actualTitle, expectedTitle);
-        } catch (Exception e) {
-            exceptionHelper.ExceptionLogger("expectedTitle does not equal to actualTitle!", e);
-        }
+        //} catch (Exception e) {
+        //    exceptionHelper.ExceptionLogger("expectedTitle does not equal to actualTitle!", e);
+        //}
     }
 
     public void CompareAlert (String expectedAlert)
     {
-        try
-        {
             String actualAlert = actionsWithWebElements.ReturnText(loginAlert);
             log.trace("Login alert is: " + actualAlert);
             Assert.assertEquals(actualAlert, expectedAlert);
-        } catch (Exception e) {
-            exceptionHelper.ExceptionLogger("expectedTitle does not equal to actualTitle!", e);
-        }
     }
 
 }
