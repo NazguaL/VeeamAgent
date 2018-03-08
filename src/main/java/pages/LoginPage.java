@@ -1,100 +1,66 @@
 package pages;
 
 import libs.ActionsWithWebElements;
+import libs.ConfigData;
 import libs.ExceptionHelper;
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+
+import java.io.IOException;
 
 /**
- * Created by sergii.ivashko on 20.02.2018.
+ * Created by User on 18.02.2018.
  */
-public class LoginPage {
-    WebDriver driver;
-    Logger log;
-    ActionsWithWebElements actionsWithWebElements;
-    ExceptionHelper exceptionHelper;
+public class LoginPage extends ParentPage
+{
+    String BaseUrl;
     /*Locators:*/
-    By loginNameInput = By.xpath(".//*[@placeholder='Login']");
-    By loginPassInput = By.xpath(".//*[@placeholder='Password']");
-    //String loginSubmitButtonInputXpath = "//*[@type='submit']";
-    By loginSubmitButtonInput = By.xpath(".//*[@type='submit']");
-    By afterLoginTitle = By.xpath(".//*[@class='gt-left pop-up-h-title']");
-    By loginAlert = By.xpath(".//*[@class='login-alert']");
+
+    @FindBy(xpath = ".//*[@placeholder='Login']")
+    WebElement loginNameInput;
+
+    @FindBy(xpath = ".//*[@placeholder='Password']")
+    WebElement loginPassInput;
+
+    @FindBy(xpath = ".//*[@type='submit']")
+    WebElement loginSubmitButtonInput;
 
 
     public LoginPage (WebDriver driver)
     {
-        this.driver = driver;
-        log = Logger.getLogger(getClass());
-        actionsWithWebElements = new ActionsWithWebElements(driver);
-        exceptionHelper = new ExceptionHelper();
+        super(driver);
     }
 
-    public void OpenLoginPage (String link)
-    {
-        try
-        {
-            driver.get(link);
-            log.trace("Login page is opened");
+    public void OpenLoginPage() {
+
+        try {
+            BaseUrl = ConfigData.getCfgValue("base_url");
+        } catch (IOException e) {
+            exceptionHelper.ExceptionLogger("Can not get base URL from config!", e);
         }
-        catch (Exception e)
-        {
-            exceptionHelper.ExceptionLogger("Can not open login page!", e);
-        }
+        actionsWithWebElements.OpenPage(BaseUrl + "/login");
     }
 
-    public void InputLogin (String login)
+    public void InputLogin(String login) {
+        actionsWithWebElements.InputToTextField(loginNameInput, login);
+    }
+
+    public void InputPass(String pass) {
+        actionsWithWebElements.InputToTextField(loginPassInput, pass);
+    }
+
+    public void ClickSubmitButton() {
+        actionsWithWebElements.ClickOnElement(loginSubmitButtonInput);
+    }
+
+    public void LoginUser (String login, String pass)
     {
-        try
-        {
-            actionsWithWebElements.InputToTextField(loginNameInput, login);
-        } catch (Exception e)
-        {
-            exceptionHelper.ExceptionLogger("Can not fill login!", e);
-        }
+        OpenLoginPage();
+        InputLogin(login);
+        InputPass(pass);
+        ClickSubmitButton();
     }
-
-    public void InputPass (String pass)
-    {
-        try
-        {
-            actionsWithWebElements.InputToTextField(loginPassInput, pass);
-        } catch (Exception e)
-        {
-            exceptionHelper.ExceptionLogger("Can not fill password!", e);
-        }
-    }
-
-    public void ClickSubmitButton ()
-    {
-        try
-        {
-            actionsWithWebElements.ClickOnButton(loginSubmitButtonInput);
-        } catch (Exception e)
-        {
-            exceptionHelper.ExceptionLogger("Can not click on \"Submit\" button!", e);
-        }
-    }
-
-    public void CompareTitle (String expectedTitle)
-    {
-        //try
-        //{
-            String actualTitle = actionsWithWebElements.ReturnText(afterLoginTitle);
-            log.trace("Login title is: " + actualTitle);
-            Assert.assertEquals(actualTitle, expectedTitle);
-        //} catch (Exception e) {
-        //    exceptionHelper.ExceptionLogger("expectedTitle does not equal to actualTitle!", e);
-        //}
-    }
-
-    public void CompareAlert (String expectedAlert)
-    {
-            String actualAlert = actionsWithWebElements.ReturnText(loginAlert);
-            log.trace("Login alert is: " + actualAlert);
-            Assert.assertEquals(actualAlert, expectedAlert);
-    }
-
 }
