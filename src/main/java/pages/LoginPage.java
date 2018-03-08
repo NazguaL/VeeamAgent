@@ -41,7 +41,7 @@ public class LoginPage extends ParentPage
         } catch (IOException e) {
             exceptionHelper.ExceptionLogger("Can not get base URL from config!", e);
         }
-        actionsWithWebElements.OpenPage(BaseUrl + "/login");
+        actionsWithWebElements.OpenPage(BaseUrl);
     }
 
     public void InputLogin(String login) {

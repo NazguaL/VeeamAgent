@@ -40,14 +40,14 @@ public class ActionsWithWebElements
         }
     }
 
-    public String Title ()
+    public String ReturnElementText (WebElement element)
     {
-        String title =  driver.getTitle();
         try {
-            log.trace("Title is: " + title);
-            return title;
+            String text = element.getText();
+            log.trace("Text of element: " + element + " is " + text);
+            return text;
         } catch (Exception e) {
-            ExceptionTextToLog  = "Can not get page title!";
+            ExceptionTextToLog  = "Can not get text of element: " + element;
             exceptionHelper.ExceptionLogger(ExceptionTextToLog, e);
             return null;
         }

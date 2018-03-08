@@ -24,8 +24,10 @@ public class PositiveLoginFromExcel extends ParentTest {
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");
         Map dataFromExcelFileForLogin = excelDriver.getData(excelDataFile, "PositiveLogin");
         loginPage.LoginUser((dataFromExcelFileForLogin.get("login").toString()),(dataFromExcelFileForLogin.get("pass").toString()));
-        checkAcceptanceCriteria("Title is not expected", homePage.GetTitle(), (dataFromExcelFileForLogin.get("criteria1").toString()));
-
+        checkAcceptanceCriteria("Page title is not expected", deployRestorePage.GetTitle(), (dataFromExcelFileForLogin.get("PageTitleTextCriteria").toString()));
+        checkAcceptanceCriteria("H Title is not expected", deployRestorePage.ReturnPopUpHTitleText(), (dataFromExcelFileForLogin.get("PopUpHTitleTextCriteria").toString()));
+        checkAcceptanceCriteria("Install button line 1 is not expected", deployRestorePage.ReturnLine1OfRestoreBlockButtonText(), (dataFromExcelFileForLogin.get("Line1OfRestoreBlockButtonTextCriteria").toString()));
+        checkAcceptanceCriteria("Install button line 2 is not expected", deployRestorePage.ReturnLine2OfRestoreBlockButtonText(), (dataFromExcelFileForLogin.get("Line2OfRestoreBlockButtonTextCriteria").toString()));
     }
 
 

@@ -18,10 +18,5 @@ public class HomePage extends ParentPage
         super(driver);
     }
 
-    public void CompareTitle (String expectedTitle)
-    {
-        String actualTitle = actionsWithWebElements.Title();
-        Assert.assertEquals(actualTitle, expectedTitle);
-    }
 
 }

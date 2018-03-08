@@ -16,6 +16,7 @@ public class ParentPage
     WebDriver driver;
     Logger log;
     ActionsWithWebElements actionsWithWebElements;
+    String ExceptionTextToLog;
     ExceptionHelper exceptionHelper;
 
     public ParentPage(WebDriver driver)
@@ -29,7 +30,15 @@ public class ParentPage
 
     public String GetTitle ()
     {
-        return driver.getTitle();
+        String title =  driver.getTitle();
+        try {
+            log.trace("Title is: " + title);
+            return title;
+        } catch (Exception e) {
+            ExceptionTextToLog  = "Can not get page title!";
+            exceptionHelper.ExceptionLogger(ExceptionTextToLog, e);
+            return null;
+        }
     }
 
     public void CheckTitle (String expectedTitle)
