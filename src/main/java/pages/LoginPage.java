@@ -28,6 +28,10 @@ public class LoginPage extends ParentPage
     @FindBy(xpath = ".//*[@type='submit']")
     WebElement loginSubmitButtonInput;
 
+    //.//*[@class='login-alert']
+    @FindBy(xpath = ".//*[@class='login-alert']")
+    WebElement loginAlter;
+
 
     public LoginPage (WebDriver driver)
     {
@@ -44,16 +48,21 @@ public class LoginPage extends ParentPage
         actionsWithWebElements.OpenPage(BaseUrl);
     }
 
-    public void InputLogin(String login) {
+    public void InputLogin (String login) {
         actionsWithWebElements.InputToTextField(loginNameInput, login);
     }
 
-    public void InputPass(String pass) {
+    public void InputPass (String pass) {
         actionsWithWebElements.InputToTextField(loginPassInput, pass);
     }
 
-    public void ClickSubmitButton() {
+    public void ClickSubmitButton () {
         actionsWithWebElements.ClickOnElement(loginSubmitButtonInput);
+    }
+
+    public String ReturnLoginAlterText ()
+    {
+        return actionsWithWebElements.ReturnElementText(loginAlter);
     }
 
     public void LoginUser (String login, String pass)

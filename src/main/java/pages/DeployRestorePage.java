@@ -21,13 +21,19 @@ public class DeployRestorePage extends ParentPage
     WebElement InstallBlockButton;
 
     @FindBy(xpath = ".//*[@class='btns-g inst-mod']/div[1]")
-    WebElement Line1OfRestoreBlockButton;
+    WebElement Line1OfInstallBlockButton;
 
     @FindBy(xpath = ".//*[@class='btns-g inst-mod']/div[2]")
-    WebElement Line2OfRestoreBlockButton;
+    WebElement Line2OfInstallBlockButton;
 
     @FindBy(xpath = ".//*[@class='btns-g restore-mod/']")
     WebElement RestoreBlockButton;
+
+    @FindBy(xpath = ".//*[@class='btns-g restore-mod']/div[1]")
+    WebElement Line1OfRestoreBlockButton;
+
+    @FindBy(xpath = ".//*[@class='btns-g restore-mod']/div[2]")
+    WebElement Line2OfRestoreBlockButton;
 
     public DeployRestorePage (WebDriver driver)
     {
@@ -40,9 +46,26 @@ public class DeployRestorePage extends ParentPage
         return text;
     }
 
+    // Install Block:
     public void ClickOnInstallBlockButton()
     {
         actionsWithWebElements.ClickOnElement(InstallBlockButton);
+    }
+
+    public String ReturnLine1OfInstallBlockButtonText ()
+    {
+        return actionsWithWebElements.ReturnElementText(Line1OfInstallBlockButton);
+    }
+
+    public String ReturnLine2OfInstallBlockButtonText ()
+    {
+        return actionsWithWebElements.ReturnElementText(Line2OfInstallBlockButton);
+    }
+
+    // Restore Block:
+    public void ClickOnRestoreBlockButton()
+    {
+        actionsWithWebElements.ClickOnElement(RestoreBlockButton);
     }
 
     public String ReturnLine1OfRestoreBlockButtonText ()
@@ -54,11 +77,5 @@ public class DeployRestorePage extends ParentPage
     {
         return actionsWithWebElements.ReturnElementText(Line2OfRestoreBlockButton);
     }
-
-    public void ClickOnRestoreBlockButton()
-    {
-        actionsWithWebElements.ClickOnElement(RestoreBlockButton);
-    }
-
 }
 
