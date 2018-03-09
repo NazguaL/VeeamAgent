@@ -10,10 +10,10 @@ import java.util.Map;
 /**
  * Created by sergii.ivashko on 04.03.2018.
  */
-public class PositiveLoginFromExcel extends ParentTest
+public class Positive1stLogin extends ParentTest
 {
 
-    public PositiveLoginFromExcel (String browser)
+    public Positive1stLogin(String browser)
     {
         super(browser);
     }
@@ -23,7 +23,7 @@ public class PositiveLoginFromExcel extends ParentTest
     {
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");
         Map dataFromExcelFileForLogin = excelDriver.getData(excelDataFile, "PositiveLogin");
-        loginPage.LoginUser((dataFromExcelFileForLogin.get("valid1stLogin").toString()),(dataFromExcelFileForLogin.get("valid1stPass").toString()));
+        loginPage.LoginUser((dataFromExcelFileForLogin.get("Valid1stLogin").toString()),(dataFromExcelFileForLogin.get("Valid1stPass").toString()));
         checkAcceptanceCriteria("Page title is not expected", deployRestorePage.GetTitle(), (dataFromExcelFileForLogin.get("PageTitleTextCriteria").toString()));
         checkAcceptanceCriteria("H Title is not expected", deployRestorePage.ReturnPopUpHTitleText(), (dataFromExcelFileForLogin.get("PopUpHTitleTextCriteria").toString()));
         checkAcceptanceCriteria("Install button line 1 is not expected", deployRestorePage.ReturnLine1OfInstallBlockButtonText(), (dataFromExcelFileForLogin.get("Line1OfInstallBlockButtonTextCriteria").toString()));

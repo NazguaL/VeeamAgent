@@ -10,10 +10,10 @@ import java.util.Map;
 /**
  * Created by sergii.ivashko on 09.03.2018.
  */
-public class NegativeLoginFromExcel extends ParentTest
+public class Negative1stLogin extends ParentTest
 {
 
-    public NegativeLoginFromExcel (String browser)
+    public Negative1stLogin(String browser)
     {
         super(browser);
     }

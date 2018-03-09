@@ -142,7 +142,6 @@ import static org.hamcrest.CoreMatchers.is;
 
         public void tearDown()
         {
-            utils.screenShot(pathToScreenShot, driver);
             driver.quit();
             driver = null;
         }
