@@ -17,14 +17,14 @@ public class ActionsWithWebElements
     Logger log;
     ExceptionHelper exceptionHelper;
     String ExceptionTextToLog;
-    WebDriverWait webDriverWait20;
+    // WebDriverWait webDriverWait20;
 
     public ActionsWithWebElements  (WebDriver driver)
     {
         this.driver = driver;
         log = Logger.getLogger(getClass());
         exceptionHelper = new ExceptionHelper();
-        webDriverWait20 = new WebDriverWait(driver, 20);
+        // webDriverWait20 = new WebDriverWait(driver, 20);
     }
 
     public void OpenPage (String Url)
@@ -68,6 +68,7 @@ public class ActionsWithWebElements
     public void ClickOnElement (WebElement element) {
         try {
             // webDriverWait20.until(ExpectedConditions.visibilityOf(element));
+            // Explicitly wait.
             element.click();
             log.trace("Clicked on element: " + element);
         } catch (Exception e) {
@@ -76,53 +77,43 @@ public class ActionsWithWebElements
         }
     }
 
-    public void SelectACheckbox(By checkbox) throws Exception {
-        // isSelected() http://selftechy.com/2011/07/23/selenium-2-0-webdriver-some-useful-apis
-        WebElement cancheck = driver.findElement(checkbox);
-        if (!cancheck.isSelected()) {
-            cancheck.click();
-            log.trace("Select a checkbox: " + checkbox);
+    public void SelectAnElement (WebElement element, boolean neededState)
+    {
+        try {
+            // isSelected() http://selftechy.com/2011/07/23/selenium-2-0-webdriver-some-useful-apis
+            if ((!element.isSelected() && neededState)||(element.isSelected() && !neededState))
+            {
+                element.click();
+                log.trace("Selected element: " + element);
+            }
+        } catch (Exception e) {
+            ExceptionTextToLog  = "Can not select element: " + element;
+            exceptionHelper.ExceptionLogger(ExceptionTextToLog, e);
         }
     }
 
-    public void UnSelectACheckbox(By checkbox) throws Exception {
-        WebElement cancheck = driver.findElement(checkbox);
-        if (cancheck.isSelected()) {
-            cancheck.click();
-            log.trace("UnSelect a checkbox: " + checkbox);
-        }
+    public boolean IsAnElementSelected (WebElement element) throws Exception
+    {
+        log.trace("Element: " + element + " IsSelected: " + element.isSelected());
+        return element.isSelected();
     }
 
-    public boolean IsACheckboxSelected (By checkbox) throws Exception
+    public boolean IsAnElementPresented (WebElement element) throws Exception
     {
-        WebElement cancheck = driver.findElement(checkbox);
-        log.trace("Checkbox: " + checkbox + "IsSelected: " + cancheck.isSelected());
-        return cancheck.isSelected();
-    }
-
-    public void SelectARadiobutton (By radiobutton) throws Exception
-    {
-        driver.findElement(radiobutton).click();
-        log.trace("Select a Radiobutton: " + radiobutton);
-    }
-
-    public boolean IsARadiobuttonSelected (By radiobutton) throws Exception
-    {
-        WebElement cancheck = driver.findElement(radiobutton);
-        log.trace("radiobutton: " + radiobutton + " IsSelected: " + cancheck.isSelected());
-        return cancheck.isSelected();
-    }
-
-    public boolean IsElementPresent (WebElement element)
-    {
+        log.trace("Element: " + element + " IsPresented: " + element.isSelected());
         return element.isDisplayed() && element.isEnabled();
     }
 
     public void SelectItemFromDropDownByVisibleElement (WebElement elementDD, String textForSelect)
     {
-        Select optionFromDD = new Select(elementDD);
-        optionFromDD.deselectByVisibleText(textForSelect);
-        log.trace(textForSelect + " was selected from DD menu.");
+        try {
+            Select optionFromDD = new Select(elementDD);
+            optionFromDD.deselectByVisibleText(textForSelect);
+            log.trace(textForSelect + " was selected from DD menu.");
+        } catch (Exception e) {
+            ExceptionTextToLog  = "Can not select element from DD menu: " + elementDD;
+            exceptionHelper.ExceptionLogger(ExceptionTextToLog, e);
+        }
     }
 
 }
