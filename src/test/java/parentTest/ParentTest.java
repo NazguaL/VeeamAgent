@@ -23,6 +23,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 //import pages.ApparatPage;
 //import pages.EditApparatPage;
 import pages.DeployRestorePage;
+import pages.EULAPage;
 import pages.HomePage;
 import pages.LoginPage;
 
@@ -42,6 +43,7 @@ import static org.hamcrest.CoreMatchers.is;
         public Logger log;
         public LoginPage loginPage;
         public HomePage homePage;
+        public EULAPage eulaPage;
         public DeployRestorePage deployRestorePage;
         public DriverInitiator driverInitiator;
        // public SdelkiListPage sdelkiListPage;
@@ -122,6 +124,7 @@ import static org.hamcrest.CoreMatchers.is;
 
             loginPage = new LoginPage(driver);
             homePage = new HomePage(driver);
+            eulaPage = new EULAPage(driver);
             deployRestorePage = new DeployRestorePage(driver);
            // sdelkiListPage = new SdelkiListPage(driver);
             //editSdelkiPage = new EditSdelkiPage(driver);
