@@ -3,7 +3,6 @@ package loginTests;
 import libs.ConfigData;
 import org.junit.Test;
 import parentTest.ParentTest;
-
 import java.io.IOException;
 import java.util.Map;
 
