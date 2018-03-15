@@ -1,10 +1,12 @@
 package loginTests;
 
 import libs.ConfigData;
+import libs.Utils;
 import org.junit.Test;
 import parentTest.ParentTest;
 import java.io.IOException;
 import java.util.Map;
+import org.junit.rules.TestName;
 
 /**
  * Created by sergii.ivashko on 13.03.2018.
@@ -16,17 +18,31 @@ public class PositiveInstallSteps extends ParentTest
     {
         super(browser);
     }
+    public TestName testName = new TestName();
+
+
 
     @Test
     public void InstallStepsTest1 () throws IOException
     {
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");
-        Map dataFromExcelFileForLogin = excelDriver.getData(excelDataFile, "PositiveLogin");
-        loginPage.LoginUser((dataFromExcelFileForLogin.get("Valid1stLogin").toString()),(dataFromExcelFileForLogin.get("Valid1stPass").toString()));
+        Map dataFromExcelFileForInstallSteps = excelDriver.getData(excelDataFile, "InstallSteps");
+        //Open Login page and enter login and pass:
+        loginPage.LoginUser((dataFromExcelFileForInstallSteps.get("Valid1stLogin").toString()),(dataFromExcelFileForInstallSteps.get("Valid1stPass").toString()));
+        //On Deploy and Restore page click on Install button:
+        //Check of expected texts on Deploy and Restore page in Positive1stLogin Test
+        GetScreenShotWithSleep("DeployRestorePageScreenShot", 1);
         deployRestorePage.ClickOnInstallBlockButton();
+        ///Check of expected texts on EULA Page and AcceptEULA:
+        checkAcceptanceCriteria("H Title is not expected", eulaPage.ReturnPopUpHTitleText(), (dataFromExcelFileForInstallSteps.get("HTitleText").toString()));
+        checkAcceptanceCriteria("Credentials Title is not expected", eulaPage.ReturnEULATitleText(), (dataFromExcelFileForInstallSteps.get("EULATitleText").toString()));
+        GetScreenShotWithSleep("EULAPageScreenShot", 1);
         eulaPage.AcceptEULA();
-        checkAcceptanceCriteria("H Title is not expected", eulaPage.ReturnPopUpHTitleText(), "Veeam Appliance for AHV: installation");
-
+        //Check of expected texts on Install Credentials Page
+        checkAcceptanceCriteria("H Title is not expected", installCredentialsPage.ReturnPopUpHTitleText(), (dataFromExcelFileForInstallSteps.get("HTitleText").toString()));
+        checkAcceptanceCriteria("Credentials Title is not expected", installCredentialsPage.ReturnCredentialsTitleText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleText").toString()));
+        checkAcceptanceCriteria("Credentials Message text is not expected", installCredentialsPage.ReturnCredentialsTitleMessageText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleMessageText").toString()));
+        GetScreenShotWithSleep("InstallCredentialsPageScreenShot", 1);
 
         /*
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");

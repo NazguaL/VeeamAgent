@@ -27,7 +27,7 @@ public class Utils
     {
         File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(scrFile, new File(pathToScreenShot));
+            FileUtils.copyFile(scrFile, new File(pathToScreenShot + ".jpg"));
             log.info("ScreenShot: " + pathToScreenShot);
         } catch (IOException e) {
             e.printStackTrace();

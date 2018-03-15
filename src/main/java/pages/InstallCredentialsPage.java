@@ -61,6 +61,20 @@ public class InstallCredentialsPage extends ParentPage
     WebElement PreviousButton;
 
 
+    public String ReturnPopUpHTitleText ()
+    {
+        return actionsWithWebElements.ReturnElementText(PopUpHTitle);
+    }
+
+    public String ReturnCredentialsTitleText ()
+    {
+        return actionsWithWebElements.ReturnElementText(CredentialsTitle);
+    }
+
+    public String ReturnCredentialsTitleMessageText ()
+    {
+        return actionsWithWebElements.ReturnElementText(CredentialsTitleMessage);
+    }
 
 
 }

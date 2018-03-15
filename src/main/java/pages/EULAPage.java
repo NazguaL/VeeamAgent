@@ -21,7 +21,8 @@ public class EULAPage extends ParentPage
     @FindBy(xpath = ".//*[@class='zagname']")
     WebElement EULATitle;
 
-    @FindBy(xpath = ".//*[@class='wizzard1']//input[@name='dva' and @type='checkbox']")
+    //@FindBy(xpath = ".//*[@class='wizzard1']//input[@name='dva' and @type='checkbox']")
+    @FindBy(xpath = ".//*[@id='react-view']/div/div[2]/div[1]/div/div/div[2]/div[2]/div/div/div[4]/label/input")
     WebElement EULACheckbox;
 
     @FindBy(xpath = ".//*[@class='go-btn gt-right go-btn-global']")
