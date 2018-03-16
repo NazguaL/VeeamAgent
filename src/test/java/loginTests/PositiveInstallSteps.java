@@ -43,6 +43,8 @@ public class PositiveInstallSteps extends ParentTest
         checkAcceptanceCriteria("Credentials Title is not expected", installCredentialsPage.ReturnCredentialsTitleText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleText").toString()));
         checkAcceptanceCriteria("Credentials Message text is not expected", installCredentialsPage.ReturnCredentialsTitleMessageText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleMessageText").toString()));
         GetScreenShotWithSleep("InstallCredentialsPageScreenShot", 1);
+        installCredentialsPage.InputInstallCredentialsFull("admin", "admin", "qwe123ASD");
+        GetScreenShotWithSleep("InstallCredentialsPageScreenShot", 1);
 
         /*
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");

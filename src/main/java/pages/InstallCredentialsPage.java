@@ -47,10 +47,10 @@ public class InstallCredentialsPage extends ParentPage
     WebElement NewPasswordField;
 
     //Confirm New Password
-    @FindBy(xpath = ".//*[@class='jis-1']/div[3]/div[1]")
+    @FindBy(xpath = ".//*[@class='jis-1']/div[4]/div[1]")
     WebElement ConfirmNewPasswordText;
 
-    @FindBy(xpath = ".//*[@class='jis-1']/div[3]/div[2]/input")
+    @FindBy(xpath = ".//*[@class='jis-1']/div[4]/div[2]/input")
     WebElement ConfirmNewPasswordField;
 
     //Buttons
@@ -60,7 +60,7 @@ public class InstallCredentialsPage extends ParentPage
     @FindBy(xpath = ".//*[@class='back-btn gt-right go-btn-global']")
     WebElement PreviousButton;
 
-
+    //Return Text Methods
     public String ReturnPopUpHTitleText ()
     {
         return actionsWithWebElements.ReturnElementText(PopUpHTitle);
@@ -76,5 +76,52 @@ public class InstallCredentialsPage extends ParentPage
         return actionsWithWebElements.ReturnElementText(CredentialsTitleMessage);
     }
 
+    public String ReturnLoginText ()
+    {
+        return actionsWithWebElements.ReturnElementText(LoginText);
+    }
 
+    public String ReturnOldPasswordText ()
+    {
+        return actionsWithWebElements.ReturnElementText(OldPasswordText);
+    }
+
+    public String ReturnNewPasswordText ()
+    {
+        return actionsWithWebElements.ReturnElementText(NewPasswordText);
+    }
+
+    public String ReturnConfirmNewPasswordText ()
+    {
+        return actionsWithWebElements.ReturnElementText(ConfirmNewPasswordText);
+    }
+
+    public void InputLogin (String login) {
+        actionsWithWebElements.InputToTextField(LoginInputField, login);
+    }
+
+    public void ReInputOldPass (String oldpass) {
+        actionsWithWebElements.InputToTextField(OldPasswordField, oldpass);
+    }
+
+    public void InputNewPass (String newpass) {
+        actionsWithWebElements.InputToTextField(NewPasswordField, newpass);
+    }
+
+    public void ConfirmNewPass (String newpass) {
+        actionsWithWebElements.InputToTextField(ConfirmNewPasswordField, newpass);
+    }
+
+    public void ClickNextButton () {
+        actionsWithWebElements.ClickOnElement(NextButton);
+    }
+
+    public void InputInstallCredentialsFull (String login, String oldpass, String newpass)
+    {
+        InputLogin(login);
+        ReInputOldPass(oldpass);
+        InputNewPass(newpass);
+        ConfirmNewPass(newpass);
+        ClickNextButton ();
+    }
 }

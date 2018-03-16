@@ -13,6 +13,7 @@ import org.junit.Rule;
 import org.junit.rules.TestName;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
@@ -59,12 +60,12 @@ public class ParentTest {
     public static Collection testData() throws IOException {
         return Arrays.asList(new Object[][]{
                 //{"FireFox"}
-                // ,
-                {"Chrome"}
+                //,
+               {"Chrome"}
                 //,
                 //{ "IEdriver" }
                 //,
-                //  { "Opera" }
+                //{ "Opera" }
 //                ,
 //                {"phantomJs"}
 //                ,
@@ -120,6 +121,7 @@ public class ParentTest {
         }
 
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().window().setSize(new Dimension(1280, 800));
 
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
