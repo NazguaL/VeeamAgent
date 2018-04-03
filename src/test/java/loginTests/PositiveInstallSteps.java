@@ -2,6 +2,7 @@ package loginTests;
 
 import libs.ConfigData;
 import libs.Utils;
+import org.junit.After;
 import org.junit.Test;
 import parentTest.ParentTest;
 import java.io.IOException;
@@ -43,8 +44,8 @@ public class PositiveInstallSteps extends ParentTest
         checkAcceptanceCriteria("Credentials Title is not expected", installCredentialsPage.ReturnCredentialsTitleText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleText").toString()));
         checkAcceptanceCriteria("Credentials Message text is not expected", installCredentialsPage.ReturnCredentialsTitleMessageText(), (dataFromExcelFileForInstallSteps.get("CredentialsTitleMessageText").toString()));
         GetScreenShotWithSleep("InstallCredentialsPageScreenShot", 1);
-        installCredentialsPage.InputInstallCredentialsFull("admin", "admin", "qwe123ASD");
-        GetScreenShotWithSleep("InstallCredentialsPageScreenShot", 1);
+        installCredentialsPage.InputInstallCredentials("admin", "admin", "qwe123ASD");
+
 
         /*
         String excelDataFile = ConfigData.getCfgValue("DATA_FILE");
@@ -57,5 +58,9 @@ public class PositiveInstallSteps extends ParentTest
         checkAcceptanceCriteria("Restore button line 1 is not expected", deployRestorePage.ReturnLine1OfRestoreBlockButtonText(), (dataFromExcelFileForLogin.get("Line1OfRestoreBlockButtonTextCriteria").toString()));
         checkAcceptanceCriteria("Restore button line 2 is not expected", deployRestorePage.ReturnLine2OfRestoreBlockButtonText(), (dataFromExcelFileForLogin.get("Line2OfRestoreBlockButtonTextCriteria").toString()));
         */
+
+
     }
+
 }
+

@@ -116,10 +116,18 @@ public class InstallCredentialsPage extends ParentPage
         actionsWithWebElements.ClickOnElement(NextButton);
     }
 
-    public void InputInstallCredentialsFull (String login, String oldpass, String newpass)
+    public void InputInstallCredentials (String login, String oldpass, String newpass)
     {
         InputLogin(login);
         ReInputOldPass(oldpass);
+        InputNewPass(newpass);
+        ConfirmNewPass(newpass);
+        ClickNextButton ();
+    }
+
+    public void InputInstallCredentials (String login, String newpass)
+    {
+        InputLogin(login);
         InputNewPass(newpass);
         ConfirmNewPass(newpass);
         ClickNextButton ();

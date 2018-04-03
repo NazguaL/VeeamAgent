@@ -5,6 +5,8 @@ package parentTest;
 import libs.DriverInitiator;
 import libs.ExcelDriver;
 import libs.Utils;
+import org.apache.commons.exec.CommandLine;
+import org.apache.commons.exec.DefaultExecutor;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
@@ -17,8 +19,10 @@ import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.concurrent.TimeUnit;
@@ -81,7 +85,7 @@ public class ParentTest {
     protected void GetScreenShotWithSleep (String pathToScreenShotPostfix, int seconds)
     {
         Sleep(seconds);
-        utils.screenShot(pathToScreenShot + pathToScreenShotPostfix, driver);
+        GetScreenShot(pathToScreenShotPostfix);
         Sleep(seconds);
     }
 
@@ -96,10 +100,14 @@ public class ParentTest {
 
     @Before
     public void setUp() {
+
+
         pathToScreenShot = ".\\target\\screenshots\\" + this.getClass().getPackage().getName() + "\\" + this.getClass().getSimpleName()
                 + this.testName.getMethodName() + browser;
 
         driverInitiator = new DriverInitiator();
+
+
 
         switch (browser) {
             case "Chrome":
@@ -132,13 +140,27 @@ public class ParentTest {
 
         excelDriver = new ExcelDriver();
 
+/*
+        ProcessBuilder b = new ProcessBuilder("C:\\Windows\\System32\\cmd.exe");
+        try {
+            b.start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        //, "cd .\\veeamconsole\\dotnet", "NutanixBackup.dll", "-useStub", "-useHttp"
+*/
+
 
     }
 
     @After
 
 
-    public void tearDown() {
+
+
+    public void tearDown()
+    {
+        GetScreenShotWithSleep("AfterTestScreenShot", 1);
         driver.quit();
         driver = null;
     }
