@@ -4,7 +4,9 @@ package parentTest;
 
 import libs.DriverInitiator;
 import libs.ExcelDriver;
+import libs.ServiceInitiator;
 import libs.Utils;
+import libs.DBHelper;
 import org.apache.commons.exec.CommandLine;
 import org.apache.commons.exec.DefaultExecutor;
 import org.apache.log4j.Logger;
@@ -40,9 +42,11 @@ public class ParentTest {
     public DeployRestorePage deployRestorePage;
     public InstallCredentialsPage installCredentialsPage;
     public DriverInitiator driverInitiator;
-
+    public ServiceInitiator serviceInitiator = new ServiceInitiator();
+    public DBHelper dbHelper = new DBHelper();
     private Utils utils = new Utils();
     private boolean isTestCompleted = false;
+
     private String ScreenShotNamePostfix;
     private String pathToScreenShot;
     public String browser;
@@ -99,13 +103,18 @@ public class ParentTest {
     }
 
     @Before
+
+
     public void setUp() {
 
+        serviceInitiator.StartService();
 
         pathToScreenShot = ".\\target\\screenshots\\" + this.getClass().getPackage().getName() + "\\" + this.getClass().getSimpleName()
                 + this.testName.getMethodName() + browser;
 
         driverInitiator = new DriverInitiator();
+
+
 
 
 
@@ -163,6 +172,8 @@ public class ParentTest {
         GetScreenShotWithSleep("AfterTestScreenShot", 1);
         driver.quit();
         driver = null;
+        serviceInitiator.StopService();
+        dbHelper.setDefaultPass();
     }
 
     protected void checkAcceptanceCriteria(String message, boolean actual, boolean expected) {
@@ -182,5 +193,7 @@ public class ParentTest {
         Assert.assertThat(message, actual, is(expected));
         isTestCompleted = true;
     }
+
+
 
 }

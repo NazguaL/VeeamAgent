@@ -17,12 +17,12 @@ public class ServiceInitiator
 
     public void StartService ()
     {
-        String[] cmd = {"C:\\WINDOWS\\system32\\cmd.exe", "/c", "sc", "start", "VeeamAgent"};
+        String[] cmdstart = {"C:\\WINDOWS\\system32\\cmd.exe", "/c", "sc", "start", "VeeamAgent"};
 
         try
         {
             Process proc = Runtime.getRuntime()
-                    .exec(cmd);
+                    .exec(cmdstart);
             log.trace("VeeamAgent service started");
 
         }
